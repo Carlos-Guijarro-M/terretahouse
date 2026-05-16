@@ -15,7 +15,8 @@
         <a routerLink="/contacto">Contacto</a>
     </nav>
 
-    @if (!user) {
+    <!-- Usamos el Signal del servicio directamente -->
+    @if (!auth.currentUser()) {
 
     <div class="autentificacion">
         <a routerLink="/login">Iniciar Sesión</a>
@@ -25,8 +26,19 @@
     } @else {
 
     <div class="autentificacion">
-        <span>Hola, {{ user.email }}</span>
-        <a (click)="logout()">Salir</a>
+        <!-- Obtenemos el email desde el objeto que devuelve el Signal -->
+        <span>
+            Hola, {{ auth.currentUser().email }}
+        </span>
+
+        @if (auth.currentUser()?.roles?.includes('ROLE_ADMIN')) {
+        <span class="style-admin">
+            ADMIN
+        </span>
+        }
+        <a (click)="logout()" style="cursor: pointer; margin-left: 10px;">
+            Salir
+        </a>
     </div>
 
     }

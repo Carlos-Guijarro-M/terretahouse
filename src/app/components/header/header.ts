@@ -1,29 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink], // Eliminamos CommonModule ya que usamos @if
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header implements OnInit {
+export class Header {
 
-  user: any = null;
-
-  ngOnInit() {
-    this.loadUser();
-  }
-
-  loadUser() {
-    this.user = JSON.parse(localStorage.getItem('user') || 'null');
-  }
+  // Hacemos el servicio público para poder usarlo directamente en el HTML
+  constructor(public auth: Auth, private router: Router) {}
 
   logout() {
-    localStorage.removeItem('user');
-    this.user = null;
-    window.location.href = '/';
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }
