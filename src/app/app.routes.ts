@@ -4,6 +4,10 @@ import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 
+import { Guias } from './pages/guias/guias';
+import { Ofertas } from './pages/ofertas/ofertas';
+import { Contacto } from './pages/contacto/contacto';
+
 export const routes: Routes = [
   {
     path: '',
@@ -16,5 +20,17 @@ export const routes: Routes = [
   {
     path: 'register',
     component: Register
+  },
+  {
+    path: 'guias',
+    component: Guias
+  },
+  {
+    path: 'ofertas',
+    component: Ofertas
+  },
+  {
+    path: 'contacto',
+    component: Contacto
   }
 ];
