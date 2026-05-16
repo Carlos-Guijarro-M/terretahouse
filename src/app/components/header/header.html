@@ -1,0 +1,34 @@
+<header class="header">
+
+    <div class="logo">
+        <img src="/logo.svg" alt="TerretaHouse">
+    </div>
+
+    <div class="menu-toggle">
+        ☰
+    </div>
+
+    <nav class="nav">
+        <a routerLink="/">Inicio</a>
+        <a routerLink="/guias">Guías de Turismo</a>
+        <a routerLink="/ofertas">Ofertas</a>
+        <a routerLink="/contacto">Contacto</a>
+    </nav>
+
+    @if (!user) {
+
+    <div class="autentificacion">
+        <a routerLink="/login">Iniciar Sesión</a>
+        <a routerLink="/register">Registrarme</a>
+    </div>
+
+    } @else {
+
+    <div class="autentificacion">
+        <span>Hola, {{ user.email }}</span>
+        <a (click)="logout()">Salir</a>
+    </div>
+
+    }
+
+</header>
