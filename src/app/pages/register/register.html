@@ -4,22 +4,20 @@
 
     <h2>Crear cuenta</h2>
 
-    <form class="register-form">
-
-      <label>Nombre</label>
-      <input type="text" placeholder="Nombre">
-
-      <label>Apellidos</label>
-      <input type="text" placeholder="Apellidos">
+    <form class="register-form" (ngSubmit)="register()">
 
       <label>Email</label>
-      <input type="email" placeholder="Email">
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email">
 
       <label>Contraseña</label>
-      <input type="password" placeholder="Contraseña">
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña">
 
       <label>Confirmar contraseña</label>
-      <input type="password" placeholder="Repetir contraseña">
+      <input type="password" [(ngModel)]="confirmarPassword" name="confirmarPassword" placeholder="Repetir contraseña">
+
+      @if (error) {
+      <p style="color: red;">{{ error }}</p>
+      }
 
       <button type="submit">Registrarme</button>
 

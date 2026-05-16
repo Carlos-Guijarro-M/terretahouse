@@ -12,7 +12,12 @@
             <label>Contraseña</label>
             <input type="password" [(ngModel)]="contrasenya" name="contrasenya" placeholder="Contraseña">
 
+            @if (error) {
+                <p style="color: red;">{{ error }}</p>
+            }
+            
             <button type="submit">Iniciar sesión</button>
+
             <p class="login-link">
                 ¿No tienes cuenta?
                 <a routerLink="/register">Regístrate</a>

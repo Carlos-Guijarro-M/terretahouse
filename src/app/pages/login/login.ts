@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Auth } from '../../services/auth';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -11,15 +14,35 @@ export class Login {
 
   email: string = '';
   contrasenya: string = '';
+  error: string = '';
+
+  constructor(private auth: Auth, private router: Router) {}
 
   login() {
-    const user = {
+
+    this.error = '';
+
+    if (!this.email || !this.contrasenya) {
+      this.error = 'Rellena todos los campos';
+      return;
+    }
+
+    const data = {
       email: this.email,
-      role: 'user'
+      password: this.contrasenya
     };
-    localStorage.setItem('user', JSON.stringify(user));
-    console.log('login OK');
-    //console.log(user);
-    window.location.href = '/';
+
+    this.auth.login(data).subscribe({
+      next: (res: any) => {
+        console.log('Login OK', res);
+
+        this.auth.setUser(res.user);
+
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.error = 'Credenciales incorrectas';
+      }
+    });
   }
 }
