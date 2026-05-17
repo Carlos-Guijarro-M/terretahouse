@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Auth } from '../../services/auth';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css']
 })
 export class Login {
 
-  email: string = '';
-  contrasenya: string = '';
-  error: string = '';
+  email = '';
+  contrasenya = '';
+  error = '';
 
   constructor(private auth: Auth, private router: Router) {}
 
@@ -27,21 +28,16 @@ export class Login {
       return;
     }
 
-    const data = {
+    this.auth.login({
       email: this.email,
-      password: this.contrasenya
-    };
-
-    this.auth.login(data).subscribe({
+      contrasenya: this.contrasenya
+    }).subscribe({
       next: (res: any) => {
-        console.log('Login OK', res);
-
-        this.auth.setUser(res.user);
-
-        this.router.navigate(['/']);
-      },
+  localStorage.setItem('user', JSON.stringify(res.user));
+  this.router.navigate(['/']);
+},
       error: () => {
-        this.error = 'Credenciales incorrectas';
+        this.error = 'Error login';
       }
     });
   }

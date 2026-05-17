@@ -15,31 +15,36 @@
         <a routerLink="/contacto">Contacto</a>
     </nav>
 
-    <!-- Usamos el Signal del servicio directamente -->
-    @if (!auth.currentUser()) {
+    @if (!auth.getUser()) {
 
-    <div class="autentificacion">
-        <a routerLink="/login">Iniciar Sesión</a>
-        <a routerLink="/register">Registrarme</a>
-    </div>
+        <div class="autentificacion">
+            <a routerLink="/login">Iniciar Sesión</a>
+            <a routerLink="/register">Registrarme</a>
+        </div>
 
     } @else {
 
-    <div class="autentificacion">
-        <!-- Obtenemos el email desde el objeto que devuelve el Signal -->
-        <span>
-            Hola, {{ auth.currentUser().email }}
-        </span>
+        <div class="autentificacion">
 
-        @if (auth.currentUser()?.roles?.includes('ROLE_ADMIN')) {
-        <span class="style-admin">
-            ADMIN
-        </span>
-        }
-        <a (click)="logout()" style="cursor: pointer; margin-left: 10px;">
-            Salir
-        </a>
-    </div>
+            <span>
+                Hola, {{ auth.getUser().email }}
+            </span>
+
+            @if (auth.getUser().roles?.includes('ROLE_ADMIN')) {
+                <span class="style-admin">
+                    ADMIN
+                </span>
+            }
+
+            <a routerLink="/mis-reservas" style="margin-left: 10px;">
+                Mis reservas
+            </a>
+
+            <a (click)="logout()" style="cursor: pointer; margin-left: 10px;">
+                Salir
+            </a>
+
+        </div>
 
     }
 

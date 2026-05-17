@@ -1,35 +1,32 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class Auth {
 
-  private apiUrl = 'http://localhost:8000/api';
+  private url = 'http://localhost:8000/api';
 
-  currentUser = signal<any>(
-    JSON.parse(localStorage.getItem('user') || 'null')
-  );
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {}
+  login(data: any) {
+  return this.http.post('http://localhost:8000/api/login', data, {
+    withCredentials: true
+  });
+}
 
-  register(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, data);
+  register(data: any) {
+    return this.http.post(`${this.url}/register`, data);
   }
 
-  login(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, data);
-  }
-
-  setUser(user: any) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUser.set(user);
-  }
+  getUser() {
+  return JSON.parse(localStorage.getItem('user') || 'null');
+}
 
   logout() {
-    localStorage.removeItem('user');
-    this.currentUser.set(null);
+    return this.http.post(`${this.url}/logout`, {}, {
+      withCredentials: true
+    });
   }
 }

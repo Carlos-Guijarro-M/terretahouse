@@ -7,6 +7,8 @@ import { Register } from './pages/register/register';
 import { Guias } from './pages/guias/guias';
 import { Ofertas } from './pages/ofertas/ofertas';
 import { Contacto } from './pages/contacto/contacto';
+import { Admin } from './pages/admin/admin';
+import { MisReservas } from './pages/mis-reservas/mis-reservas';
 
 export const routes: Routes = [
   {
@@ -32,5 +34,13 @@ export const routes: Routes = [
   {
     path: 'contacto',
     component: Contacto
+  },
+  {
+    path: 'admin',
+    component: Admin
+  },
+  {
+    path: 'mis-reservas',
+    component: MisReservas
   }
 ];
