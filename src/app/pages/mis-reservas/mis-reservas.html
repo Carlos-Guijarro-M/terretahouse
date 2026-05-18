@@ -9,20 +9,18 @@
     <h2>Reservas activas</h2>
 
     @if (!reservas || reservas.length === 0) {
-    <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
-      No tienes reservas todavía
-    </div>
+      <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+        No tienes reservas todavía
+      </div>
     } @else {
-
-    @for (r of reservas; track r.id) {
-    <div class="card">
-      <h3>{{ r.titulo }}</h3>
-      <p>Fecha: {{ r.fecha?.date || r.fecha }}</p>
-      <p>Estado: {{ r.estado }}</p>
-      <button>Eliminar</button>
-    </div>
-    }
-
+      @for (r of reservas; track r.id) {
+        <div class="card">
+          <h3>{{ r.titulo }}</h3>
+          <p>Fecha: {{ r.fecha?.date || r.fecha }}</p>
+          <p>Estado: {{ r.estado }}</p>
+          <button>Eliminar</button>
+        </div>
+      }
     }
 
   </section>

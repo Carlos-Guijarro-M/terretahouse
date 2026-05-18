@@ -30,12 +30,12 @@ export class Login {
 
     this.auth.login({
       email: this.email,
-      contrasenya: this.contrasenya
+      password: this.contrasenya
     }).subscribe({
       next: (res: any) => {
-  localStorage.setItem('user', JSON.stringify(res.user));
-  this.router.navigate(['/']);
-},
+        this.auth.setUser(res.user);
+        this.router.navigate(['/']);
+      },
       error: () => {
         this.error = 'Error login';
       }

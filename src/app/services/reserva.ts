@@ -11,8 +11,10 @@ export class Reserva {
   constructor(private http: HttpClient) { }
 
   getReservas(userId: number) {
-  return this.http.get(`http://localhost:8000/api/reservas?userId=${userId}`);
-}
+    return this.http.get(`${this.url}?userId=${userId}`, {
+      withCredentials: true
+    });
+  }
 
   crearReserva(data: any) {
     return this.http.post(this.url, data, {

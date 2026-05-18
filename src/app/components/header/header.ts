@@ -15,7 +15,15 @@ export class Header {
   constructor(public auth: Auth, private router: Router) {}
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+    this.auth.logout().subscribe({
+      next: () => {
+        this.auth.clearUser();
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.auth.clearUser();
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }
