@@ -16,8 +16,10 @@
       @for (r of reservas; track r.id) {
         <div class="card">
           <h3>{{ r.titulo }}</h3>
-          <p>Fecha: {{ r.fecha?.date || r.fecha }}</p>
-          <p>Estado: {{ r.estado }}</p>
+          <!-- Cambiado para pintar la fecha limpia directamente -->
+          <p>Fecha: {{ r.fecha }}</p>
+          <!-- Si el estado viene vacío en la BD, muestra 'Sin estado' -->
+          <p>Estado: {{ r.estado || 'pendiente' }}</p>
           <button>Eliminar</button>
         </div>
       }
