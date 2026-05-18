@@ -1,8 +1,11 @@
 <header class="header">
 
     <div class="logo">
+    <!-- Enlazamos a la raíz (/) que es el Inicio -->
+    <a routerLink="/" style="cursor: pointer;">
         <img src="/logo.svg" alt="TerretaHouse">
-    </div>
+    </a>
+</div>
 
     <div class="menu-toggle">
         ☰
@@ -25,24 +28,44 @@
     } @else {
 
         <div class="autentificacion">
+            
+            <!-- CONTENEDOR DEL DESPLEGABLE -->
+            <div class="dropdown">
+                
+                <!-- 
+                  AL HACER CLIC: Cambiamos el valor de 'menuAbierto'.
+                  Si estaba cerrado (false), pasa a abierto (true), y al revés.
+                -->
+                <button class="dropdown-btn" (click)="menuAbierto = !menuAbierto">
+                    👤 {{ auth.getUser().email }} ▼
+                </button>
 
-            <span>
-                Hola, {{ auth.getUser().email }}
-            </span>
+                <!-- 
+                  @if CONTROLA EL CLIC: El cajoncito solo existe en el HTML 
+                  si la variable 'menuAbierto' es verdadera.
+                -->
+                @if (menuAbierto) {
+                    <div class="dropdown-content">
+                        
+                        <!-- Contenido exclusivo para el ADMIN -->
+                        @if (auth.getUser().roles?.includes('ROLE_ADMIN')) {
+                            <div class="admin-tag">ADMINISTRADOR</div>
+                            <a routerLink="/crear-reservas" (click)="menuAbierto = false">➕ Crear Actividades</a>
+                            <hr>
+                        }
 
-            @if (auth.getUser().roles?.includes('ROLE_ADMIN')) {
-                <span class="style-admin">
-                    ADMIN
-                </span>
-            }
+                        <!-- Contenido para todos los usuarios logueados -->
+                        <!-- Al hacer clic en el enlace, también cerramos el menú con menuAbierto = false -->
+                        <a routerLink="/mis-reservas" (click)="menuAbierto = false">📅 Mis reservas</a>
+                        
+                        <a (click)="logout(); menuAbierto = false" style="cursor: pointer; color: red;">
+                            ❌ Salir
+                        </a>
 
-            <a routerLink="/mis-reservas" style="margin-left: 10px;">
-                Mis reservas
-            </a>
+                    </div>
+                }
 
-            <a (click)="logout()" style="cursor: pointer; margin-left: 10px;">
-                Salir
-            </a>
+            </div>
 
         </div>
 

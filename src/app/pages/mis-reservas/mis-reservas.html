@@ -1,28 +1,37 @@
 <div class="reservas">
 
+  <!-- Sección Hero de cabecera -->
   <section class="hero">
-    <h1>Mis reservas</h1>
+    <h1>Mis Reservas</h1>
   </section>
 
+  <!-- Contenedor principal -->
   <section class="section">
-
-    <h2>Reservas activas</h2>
+    <h2>Reservas Activas</h2>
 
     @if (!reservas || reservas.length === 0) {
-      <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
-        No tienes reservas todavía
+      <div class="no-reservas">
+        📭 No tienes reservas todavía. ¡Anímate a descubrir la Terreta!
       </div>
     } @else {
-      @for (r of reservas; track r.id) {
-        <div class="card">
-          <h3>{{ r.titulo }}</h3>
-          <!-- Cambiado para pintar la fecha limpia directamente -->
-          <p>Fecha: {{ r.fecha }}</p>
-          <!-- Si el estado viene vacío en la BD, muestra 'Sin estado' -->
-          <p>Estado: {{ r.estado || 'pendiente' }}</p>
-          <button>Eliminar</button>
-        </div>
-      }
+      
+      <!-- CONTENEDOR GRID: Esto hace la magia de ponerlas juntas -->
+      <div class="grid">
+        
+        @for (r of reservas; track r.id) {
+          <div class="card">
+            <h3>🎯 {{ r.titulo }}</h3>
+            <p class="fecha">📅 <strong>Fecha:</strong> {{ r.fecha }}</p>
+            <p class="estado">
+              ⚙️ <strong>Estado:</strong> 
+              <span class="badge">{{ r.estado || 'pendiente' }}</span>
+            </p>
+            <button class="btn-eliminar">❌ Cancelar Reserva</button>
+          </div>
+        }
+
+      </div>
+
     }
 
   </section>

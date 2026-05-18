@@ -10,37 +10,29 @@ import { Auth } from '../../services/auth';
   templateUrl: './mis-reservas.html',
   styleUrls: ['./mis-reservas.css']
 })
-export class MisReservas implements OnInit {
+export class MisReservas { 
 
   reservas: any[] = [];
 
   constructor(
     private reservaService: Reserva, 
     private auth: Auth,
-    private cdr: ChangeDetectorRef // 👈 Inyectamos el detector de cambios
+    //Sirve para gestionar la detección de cambios de forma manual
+    private cdr: ChangeDetectorRef 
   ) {}
 
   ngOnInit() {
-    const user = this.auth.getUser();
-    console.log('Intento de carga de reservas para:', user);
+    const usuario = this.auth.getUser();
 
-    if (!user) {
-      console.warn('No hay sesión de usuario en localStorage');
+    if (!usuario) {
       return;
     }
 
-    this.reservaService.getReservas().subscribe({
-      next: (res: any) => {
-        // Asignamos los datos creando una nueva referencia de array
-        this.reservas = Array.isArray(res) ? [...res] : [];
-        console.log('RESERVA DETALLADA:', JSON.stringify(this.reservas));
-        
-        // 👈 Forzamos a Angular a renderizar la pantalla AHORA
-        this.cdr.detectChanges(); 
-      },
-      error: (err) => {
-        console.error('Error cargando reservas:', err);
+    this.reservaService.getReservas().subscribe(
+      (respuesta: any) => {
+        this.reservas = respuesta;
+        this.cdr.detectChanges();
       }
-    });
+    );
   }
 }

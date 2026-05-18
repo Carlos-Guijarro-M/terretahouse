@@ -1,40 +1,18 @@
+/* EL CONTENEDOR PRINCIPAL DEL MENU */
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 30px;
-    background-color: #A0685D;
-    animation: fadeInUp 0.5s ease-out;
-    flex-wrap: nowrap;
+    background-color: #A0685D; /* Marrón corporativo */
 }
 
-.style-admin {
-    color: #F6F1EC;
-    border: 1px solid #F6F1EC;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    margin-left: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.style-admin:hover {
-    background-color: #F6F1EC;
-    color: #A0685D;
-    cursor: pointer; 
-}
-
-.logo {
-    flex-shrink: 0;
-}
-
+/* LOGO */
 .logo img {
     height: 80px;
-    width: auto;
-    display: block;
 }
 
+/* BOTON PARA MENU MOVIL (Oculto en ordenador) */
 .menu-toggle {
     display: none;
     font-size: 26px;
@@ -42,28 +20,23 @@
     cursor: pointer;
 }
 
+/* SECCION DE ENLACES (Inicio, Ofertas, Contacto...) */
 .nav {
     display: flex;
     gap: 25px;
-    flex-shrink: 0;
 }
 
 .nav a {
     text-decoration: none;
-    color: #F6F1EC;
-    font-weight: 500;
-    transition: opacity 0.2s ease;
+    color: #F6F1EC; /* Blanco hueso */
+    font-size: 24px;
 }
 
-.nav a:hover {
-    opacity: 0.8;
-}
-
-/* AUTENTICACIÓN */
+/* SECCION DE LOGIN / REGISTRO / PERFIL */
 .autentificacion {
     display: flex;
     gap: 15px;
-    flex-shrink: 0;
+    align-items: center;
 }
 
 .autentificacion a {
@@ -72,74 +45,104 @@
     border: 1px solid #F6F1EC;
     padding: 6px 12px;
     border-radius: 6px;
-    transition: all 0.25s ease;
+    font-size: 20px;
 }
 
+/* Efecto hover básico: cuando pasas el ratón se invierten los colores */
 .autentificacion a:hover {
     background-color: #F6F1EC;
     color: #A0685D;
 }
 
-/* ANIMACIÓN */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ==========================================
+   ⚙️ MENU DESPLEGABLE (CLICK DE USUARIO)
+   ========================================== */
+
+/* Contenedor relativo para que la caja flotante no se mueva de su sitio */
+.dropdown {
+    position: relative;
 }
 
-/* TABLET */
+/* Botón que muestra el Email. Tiene el mismo estilo que los botones de Login */
+.dropdown-btn {
+    background-color: transparent;
+    color: #F6F1EC;
+    border: 1px solid #F6F1EC;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dropdown-btn:hover {
+    background-color: #F6F1EC;
+    color: #A0685D;
+}
+
+/* La caja flotante que aparece al hacer clic (gracias al @if de Angular) */
+.dropdown-content {
+    position: absolute;
+    right: 0; /* Pegado a la derecha del botón */
+    background-color: #F6F1EC; /* Fondo blanco hueso */
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15); /* Una sombra suave básica */
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+/* Texto de "ADMINISTRADOR" dentro de la caja */
+.admin-tag {
+    font-size: 12px;
+    font-weight: bold;
+    color: #A0685D;
+    padding: 10px 16px 5px 16px;
+}
+
+/* Los enlaces de dentro de la caja flotante */
+.dropdown-content a {
+    color: #A0685D;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border: none; /* Quitamos el borde de los botones normales */
+    border-radius: 0px;
+}
+
+/* Al pasar el ratón por las opciones de dentro, se pintan de blanco puro */
+.dropdown-content a:hover {
+    background-color: #FFFFFF;
+}
+
+/* Línea divisoria gris fina */
+.dropdown-content hr {
+    border: 0;
+    border-top: 1px solid #E0E0E0;
+    margin: 5px 0;
+}
+
+
+/* ==========================================
+   📱 ADAPTACION PARA PANTALLAS (RESPONSIVE)
+   ========================================== */
+
+/* TABLET (Pantallas medianas) */
 @media (max-width: 1024px) {
-    .header {
-        padding: 12px 15px;
-    }
-
-    .nav {
-        gap: 15px;
-    }
-
     .nav a {
         font-size: 14px;
     }
-
-    .autentificacion {
-        gap: 10px;
-    }
-
-    .autentificacion a {
-        padding: 5px 10px;
+    .autentificacion a, .dropdown-btn {
         font-size: 14px;
     }
 }
 
-/* MÓVIL */
+/* MÓVIL (Pantallas pequeñas) */
 @media (max-width: 768px) {
-
-    .header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+    .nav, .autentificacion {
+        display: none; /* Se ocultan los menús para usar el botón de tres rayas */
     }
-
-    .logo {
-        width: auto;
-        justify-content: flex-start;
-    }
-
-    .nav,
-    .autentificacion {
-        display: none;
-    }
-
     .menu-toggle {
-        display: block;
-        font-size: 26px;
-        color: #F6F1EC;
-        cursor: pointer;
+        display: block; /* Aparecen las tres rayas */
     }
 }

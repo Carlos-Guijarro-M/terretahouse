@@ -5,13 +5,15 @@ import { Auth } from '../../services/auth';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink], // Eliminamos CommonModule ya que usamos @if
+  imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
 
-  // Hacemos el servicio público para poder usarlo directamente en el HTML
+  // 1. Variable Junior: controla si el menú está a la vista (true) o escondido (false)
+  menuAbierto: boolean = false;
+
   constructor(public auth: Auth, private router: Router) {}
 
   logout() {

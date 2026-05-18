@@ -1,47 +1,106 @@
 .reservas {
   font-family: Arial, sans-serif;
+  background-color: #F6F1EC; /* Fondo blanco hueso de tu web */
+  min-height: 100vh;
 }
 
+/* Cabecera con imagen de fondo */
 .hero {
-  height: 50vh;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-              url('/hero1-home.jpg');
-
+  height: 40vh; /* Bajado un poco para que no ocupe media pantalla */
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/hero1-home.jpg');
   background-size: cover;
   background-position: center;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  color: white;
-  text-align: center;
+  color: #F6F1EC;
 }
 
+.hero h1 {
+  font-size: 42px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Sección contenedora */
 .section {
-  padding: 60px 20px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* Centra el contenido en pantallas grandes */
+}
+
+.section h2 {
+  color: #A0685D; /* Título en tu marrón corporativo */
+  font-size: 28px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
+/* Mensaje de "No tienes reservas" */
+.no-reservas {
+  text-align: center;
+  padding: 30px;
+  font-size: 18px;
+  color: #A0685D;
+  background: white;
+  border-radius: 8px;
+  border: 1px dashed #A0685D;
+}
+
+/* 🔥 LA MALLA GRID: Distribuye las tarjetas una al lado de otra */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* auto-fill rellena mejor el espacio */
+  gap: 25px; /* Espacio entre tarjetas */
 }
 
+/* Estilo moderno para cada tarjeta */
 .card {
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra muy suave moderna */
+  text-align: left; /* Contenido alineado a la izquierda */
+  border-top: 4px solid #A0685D; /* Detalle elegante con el color de tu marca */
 }
 
-.card button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  border: none;
+.card h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.card p {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #666;
+}
+
+/* Pequeña etiqueta visual para el estado */
+.badge {
+  background-color: rgba(160, 104, 93, 0.1);
+  color: #A0685D;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Botón de eliminar estilizado */
+.btn-eliminar {
+  margin-top: 15px;
+  width: 100%; /* Ocupa todo el ancho de la tarjeta */
+  padding: 10px;
+  border: 1px solid #c0392b;
+  background: transparent;
+  color: #c0392b;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Efecto hover básico para el botón */
+.btn-eliminar:hover {
   background: #c0392b;
   color: white;
-  border-radius: 6px;
-  cursor: pointer;
 }

@@ -31,6 +31,11 @@
     color: #F6F1EC;
     font-weight: 500;
     transition: opacity 0.2s ease;
+    font-size: 24px;
+}
+
+.footer-col p {
+    font-size: 24px;
 }
 
 .footer-col a:hover {
@@ -58,6 +63,7 @@
     color: #F6F1EC;
     opacity: 0.9;
     transition: opacity 0.2s ease;
+    font-size: 24px;
 }
 
 .footer-bottom a:hover {
