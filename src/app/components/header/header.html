@@ -1,11 +1,11 @@
 <header class="header">
 
     <div class="logo">
-    <!-- Enlazamos a la raíz (/) que es el Inicio -->
-    <a routerLink="/" style="cursor: pointer;">
-        <img src="/logo.svg" alt="TerretaHouse">
-    </a>
-</div>
+        <!-- Enlazamos a la raíz (/) que es el Inicio -->
+        <a routerLink="/" style="cursor: pointer;">
+            <img src="/logo.svg" alt="TerretaHouse">
+        </a>
+    </div>
 
     <div class="menu-toggle">
         ☰
@@ -32,18 +32,10 @@
             <!-- CONTENEDOR DEL DESPLEGABLE -->
             <div class="dropdown">
                 
-                <!-- 
-                  AL HACER CLIC: Cambiamos el valor de 'menuAbierto'.
-                  Si estaba cerrado (false), pasa a abierto (true), y al revés.
-                -->
                 <button class="dropdown-btn" (click)="menuAbierto = !menuAbierto">
                     👤 {{ auth.getUser().email }} ▼
                 </button>
 
-                <!-- 
-                  @if CONTROLA EL CLIC: El cajoncito solo existe en el HTML 
-                  si la variable 'menuAbierto' es verdadera.
-                -->
                 @if (menuAbierto) {
                     <div class="dropdown-content">
                         
@@ -54,9 +46,12 @@
                             <hr>
                         }
 
-                        <!-- Contenido para todos los usuarios logueados -->
-                        <!-- Al hacer clic en el enlace, también cerramos el menú con menuAbierto = false -->
-                        <a routerLink="/mis-reservas" (click)="menuAbierto = false">📅 Mis reservas</a>
+                        <!-- 🚀 CAMBIO AQUÍ: El texto del botón cambia según el rol, pero lleva al mismo sitio -->
+                        @if (auth.getUser().roles?.includes('ROLE_ADMIN')) {
+                            <a routerLink="/mis-reservas" (click)="menuAbierto = false">👁️ Ver Actividades</a>
+                        } @else {
+                            <a routerLink="/mis-reservas" (click)="menuAbierto = false">📅 Mis reservas</a>
+                        }
                         
                         <a (click)="logout(); menuAbierto = false" style="cursor: pointer; color: red;">
                             ❌ Salir

@@ -2,16 +2,20 @@
 
   <!-- Sección Hero de cabecera -->
   <section class="hero">
-    <h1>Mis Reservas</h1>
+    <h1>{{ tituloPagina }}</h1>
   </section>
 
   <!-- Contenedor principal -->
   <section class="section">
-    <h2>Reservas Activas</h2>
+    <h2>Listado actual</h2>
 
     @if (!reservas || reservas.length === 0) {
       <div class="no-reservas">
+        @if (isAdmin) {
+          📭 No hay actividades creadas todavía. ¡Anímate a crear la primera!
+        } @else {
         📭 No tienes reservas todavía. ¡Anímate a descubrir la Terreta!
+        }
       </div>
     } @else {
       
@@ -26,7 +30,10 @@
               ⚙️ <strong>Estado:</strong> 
               <span class="badge">{{ r.estado || 'pendiente' }}</span>
             </p>
-            <button class="btn-eliminar">❌ Cancelar Reserva</button>
+
+            @if (!isAdmin) {
+              <button class="btn-eliminar">❌ Cancelar Reserva</button>
+            }
           </div>
         }
 

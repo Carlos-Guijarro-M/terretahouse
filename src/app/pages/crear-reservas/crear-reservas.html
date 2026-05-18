@@ -1,0 +1,90 @@
+<div class="gestion-actividades">
+
+  <!-- Cabecera de la página -->
+  <section class="hero">
+    <h1>Panel de Administración</h1>
+  </section>
+
+  <div class="contenedor-principal">
+
+    <!-- FORMULARIO PARA CREAR NUEVA ACTIVIDAD o EDITAR -->
+    <section class="seccion-formulario">
+      <!-- 🔄 Título dinámico según si estamos editando (tiene ID) o creando (id es null) -->
+      @if (nuevaActividad.id === null) {
+        <h2>➕ Crear Nueva Actividad / Visita</h2>
+      } @else {
+        <h2>✏️ Modificando Actividad (ID: {{ nuevaActividad.id }})</h2>
+      }
+      
+      <form (submit)="guardarActividad($event)">
+        <div class="campo">
+          <label for="titulo">Título de la actividad:</label>
+          <input type="text" id="titulo" name="titulo" [(ngModel)]="nuevaActividad.titulo" placeholder="Ej: Tour por el Barrio del Carmen" required>
+        </div>
+
+        <div class="campo">
+          <label for="fecha">Fecha del evento:</label>
+          <input type="date" id="fecha" name="fecha" [(ngModel)]="nuevaActividad.fecha" required>
+        </div>
+
+        <div class="campo">
+          <label for="estado">Estado inicial:</label>
+          <select id="estado" name="estado" [(ngModel)]="nuevaActividad.estado">
+            <option value="disponible">Disponible</option>
+            <option value="completo">Completo</option>
+          </select>
+        </div>
+
+        <!-- Contenedor para alinear los botones si estamos en modo edición -->
+        <div class="botones-formulario">
+          <button type="submit" class="btn-guardar">Guardar Actividad</button>
+          
+          <!-- ❌ BOTÓN CANCELAR: Solo aparece si el objeto tiene un ID (es decir, estamos editando) -->
+          @if (nuevaActividad.id !== null) {
+            <button type="button" class="btn-cancelar" (click)="limpiarFormulario()" style="background-color: #e74c3c; color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 10px;">❌ Cancelar Edición</button>
+          }
+        </div>
+      </form>
+    </section>
+
+    <!-- TABLA PARA LISTAR Y GESTIONAR LAS ACTIVIDADES EXISTENTES -->
+    <section class="seccion-tabla">
+      <h2>📋 Listado de Actividades Globales</h2>
+
+      @if (!actividades || actividades.length === 0) {
+        <p class="sin-datos">No hay actividades creadas todavía en el sistema.</p>
+      } @else {
+        <div class="tabla-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (act of actividades; track act.id) {
+                <tr>
+                  <td><strong>{{ act.id }}</strong></td>
+                  <td>{{ act.titulo }}</td>
+                  <td>{{ act.fecha }}</td>
+                  <td><span class="badge">{{ act.estado || 'disponible' }}</span></td>
+                  <td>
+                    <div class="botones-accion">
+                      <button class="btn-editar" (click)="cargarParaEditar(act)">✏️ Editar</button>
+                      <button class="btn-borrar" (click)="eliminarActividad(act.id)">🗑️ Borrar</button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { Ofertas } from './pages/ofertas/ofertas';
 import { Contacto } from './pages/contacto/contacto';
 import { Admin } from './pages/admin/admin';
 import { MisReservas } from './pages/mis-reservas/mis-reservas';
+import { CrearReservas } from './pages/crear-reservas/crear-reservas';
 
 export const routes: Routes = [
   {
@@ -42,5 +43,9 @@ export const routes: Routes = [
   {
     path: 'mis-reservas',
     component: MisReservas
+  },
+  {
+    path: 'crear-reservas',
+    component: CrearReservas
   }
 ];

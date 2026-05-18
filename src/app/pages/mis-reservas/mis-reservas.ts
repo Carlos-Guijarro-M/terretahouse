@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Reserva } from '../../services/reserva';
 import { Auth } from '../../services/auth';
@@ -13,6 +13,8 @@ import { Auth } from '../../services/auth';
 export class MisReservas { 
 
   reservas: any[] = [];
+  tituloPagina: string = 'Mis Reservas';
+  isAdmin: boolean = false;
 
   constructor(
     private reservaService: Reserva, 
@@ -28,11 +30,31 @@ export class MisReservas {
       return;
     }
 
-    this.reservaService.getReservas().subscribe(
-      (respuesta: any) => {
-        this.reservas = respuesta;
-        this.cdr.detectChanges();
-      }
-    );
+    this.isAdmin = usuario.roles.includes('ROLE_ADMIN');
+    if (this.isAdmin) {
+      this.tituloPagina = 'Gestión de Actividades';
+
+      //Si soy ADMIN
+      this.reservaService.getActividades().subscribe(
+        (respuesta: any) => {
+          this.reservas = respuesta;
+          this.cdr.detectChanges();
+        }
+      );
+
+    } else {
+      this.tituloPagina = 'Mis Reservas';
+    
+      //Si spoy USUARIO 
+      this.reservaService.getReservas().subscribe(
+        (respuesta: any) => {
+          this.reservas = respuesta;
+          this.cdr.detectChanges();
+        },
+        (error) => {
+          console.error('Error al cargar las reservas:', error);
+        }
+      );
+    }
   }
 }

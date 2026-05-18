@@ -1,0 +1,159 @@
+.gestion-actividades {
+  font-family: Arial, sans-serif;
+  background-color: #F6F1EC; /* Fondo claro de tu web */
+  min-height: 100vh;
+}
+
+/* Cabecera idéntica a la de Mis Reservas */
+.hero {
+  height: 30vh;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/hero1-home.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F6F1EC;
+}
+
+.hero h1 {
+  font-size: 36px;
+}
+
+/* Contenedor que envuelve el formulario y la tabla */
+.contenedor-principal {
+  padding: 30px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #A0685D; /* Marrón corporativo */
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* --- ESTILOS DEL FORMULARIO --- */
+.seccion-formulario {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.campo {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.campo label {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.campo input, .campo select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.btn-guardar {
+  background-color: #A0685D;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-guardar:hover {
+  opacity: 0.9;
+}
+
+/* --- ESTILOS DE LA TABLA --- */
+.seccion-tabla {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.tabla-responsiva {
+  overflow-x: auto; /* Por si la pantalla es pequeña, que salga barra de scroll en la tabla */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Quita los espacios dobles entre bordes */
+  text-align: left;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #E0E0E0;
+  font-size: 15px;
+}
+
+th {
+  background-color: #A0685D;
+  color: white;
+}
+
+.sin-datos {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+/* Etiquetas de estado y botones */
+.badge {
+  background-color: rgba(160, 104, 93, 0.1);
+  color: #A0685D;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.botones-accion {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-editar {
+  background: transparent;
+  border: 1px solid #A0685D;
+  color: #A0685D;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background-color: #A0685D;
+  color: white;
+}
+
+.btn-borrar {
+  background: transparent;
+  border: 1px solid #c0392b;
+  color: #c0392b;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-borrar:hover {
+  background-color: #c0392b;
+  color: white;
+}
